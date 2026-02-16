@@ -1,0 +1,18 @@
+# Environment variables file (Очень важно!)
+.env
+config_local.py
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE specific
+.vscode/
+.idea/
+
+# Virtual environments
+venv/
+env/
+ENV/
