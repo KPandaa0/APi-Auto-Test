@@ -1,0 +1,32 @@
+name: Run Tests # Название workflow
+
+on: [push, pull_request] # Когда запускать
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # Использовать Ubuntu
+
+    steps:
+    # 1. Склонировать репозиторий
+    - uses: actions/checkout@v4
+
+    # 2. Установить Python
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    # 3. Установить зависимости
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest requests python-dotenv # Добавь python-dotenv если используешь
+
+    # 4. Запустить pytest, передав секреты как переменные окружения
+    - name: Run tests with pytest
+      run: |
+        python -m pytest # или просто pytest
+      env: # <-- Вот этот блок env важен!
+        USER_EMAIL: ${{ secrets.USER_EMAIL }} # Передаём секрет как переменную окружения
+        USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+        # REQUEST_TIMEOUT: ${{ secrets.REQUEST_TIMEOUT }} # Если добавил такой secret
