@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 class Config:
     # Используем os.getenv для получения значений из переменных окружения
     BASE_URL = os.getenv("API_BASE_URL", "https://trustytalents.com").rstrip() # Убираем пробелы в конце
